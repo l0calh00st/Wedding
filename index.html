@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undangan Pernikahan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <audio autoplay loop hidden>
+    <source src="https://cdn.pixabay.com/download/audio/2022/11/24/audio_52498318be.mp3?filename=romantic-piano-loop-126718.mp3" type="audio/mpeg">
+  </audio>
+
+  <section class="hero">
+    <div class="overlay">
+      <h1 class="nama-mempelai">Rina & Andi</h1>
+      <p class="tanggal">Sabtu, 20 Juli 2025</p>
+      <div id="countdown"></div>
+    </div>
+  </section>
+
+  <section class="konten">
+    <h2>Assalamu’alaikum Warahmatullahi Wabarakatuh</h2>
+    <p>Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami:</p>
+
+    <div class="mempelai">
+      <div>
+        <h3>Rina Aulia</h3>
+        <p>Putri dari Bapak H. Ahmad & Ibu Hj. Salmah</p>
+      </div>
+      <div>
+        <h3>Andi Saputra</h3>
+        <p>Putra dari Bapak H. Bambang & Ibu Hj. Dewi</p>
+      </div>
+    </div>
+
+    <div class="acara">
+      <h3>Waktu & Tempat</h3>
+      <p><strong>Akad Nikah:</strong><br>Sabtu, 20 Juli 2025 - 08.00 WIB<br>Masjid Al-Falah, Jakarta</p>
+      <p><strong>Resepsi:</strong><br>Sabtu, 20 Juli 2025 - 11.00 WIB<br>Gedung Harmoni, Jakarta</p>
+    </div>
+
+    <div class="rsvp">
+      <h3>Konfirmasi Kehadiran</h3>
+      <form id="rsvpForm">
+        <input type="text" id="nama" placeholder="Nama Anda" required />
+        <select id="kehadiran" required>
+          <option value="">Pilih Kehadiran</option>
+          <option value="Hadir">Hadir</option>
+          <option value="Tidak Hadir">Tidak Hadir</option>
+        </select>
+        <textarea id="ucapan" placeholder="Ucapan & Doa" rows="4"></textarea>
+        <button type="submit">Kirim</button>
+      </form>
+      <p id="terimaKasih" style="display:none;">Terima kasih atas konfirmasinya!</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Wassalamu’alaikum Warahmatullahi Wabarakatuh<br>Rina & Andi</p>
+  </footer>
+
+  <script>
+    // Hitung mundur ke tanggal pernikahan
+    const countdown = document.getElementById("countdown");
+    const weddingDate = new Date("2025-07-20T08:00:00").getTime();
+    const x = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `Dalam ${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
+      if (distance < 0) {
+        clearInterval(x);
+        countdown.innerHTML = "Acara sedang berlangsung.";
+      }
+    }, 1000);
+
+    // Kirim ke Google Sheet
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyDH3e8cK2AZa8fjiinjifW1p8AF6B2CXFjZFmfPzD-dzCSWtvmv9Fy3FRuCROkq1Ly/exec';
+    const form = document.getElementById('rsvpForm');
+    const thanks = document.getElementById('terimaKasih');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const data = {
+        nama: document.getElementById('nama').value,
+        kehadiran: document.getElementById('kehadiran').value,
+        ucapan: document.getElementById('ucapan').value
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        form.reset();
+        form.style.display = 'none';
+        thanks.style.display = 'block';
+      })
+      .catch(error => alert('Gagal mengirim. Silakan coba lagi.'));
+    });
+  </script>
+</body>
+</html>
