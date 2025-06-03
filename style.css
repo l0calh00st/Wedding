@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Playfair Display', serif;
+  background-color: #f6f2ee;
+  color: #4d4d4d;
+  line-height: 1.6;
+}
+
+.hero {
+  background-color: #f6f2ee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem 2rem;
+  flex-direction: column;
+  text-align: center;
+}
+
+.nama-mempelai {
+  font-size: 3rem;
+  color: #9a7b4f;
+  font-weight: normal;
+  margin: 0;
+}
+
+.tanggal {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #777;
+}
+
+#countdown {
+  font-size: 1rem;
+  margin-top: 1rem;
+  color: #777;
+}
+
+.konten {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.konten h2 {
+  color: #9a7b4f;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 2rem 0;
+}
+
+.mempelai h3,
+.acara h3,
+.rsvp h3 {
+  font-size: 1.2rem;
+  color: #9a7b4f;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+.mempelai p,
+.acara p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+form button {
+  background-color: #9a7b4f;
+  color: white;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+form button:hover {
+  background-color: #7e6341;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #999;
+  padding: 2rem;
+  background-color: #f6f2ee;
+  margin-top: 4rem;
+}
+
+@media (max-width: 600px) {
+  .nama-mempelai {
+    font-size: 2.2rem;
+  }
+  .konten {
+    padding: 1.5rem;
+  }
+}
